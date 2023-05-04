@@ -38,7 +38,7 @@ public getPaymentDate(): Date {
 }
 
   protected generateTransactionCode(): string {
-    // const timeStamp = Date.now(); ------ one way of doing timestamp
+    // const timeStamp = Date.now(); ------ another way of doing timestamp
     const now = new Date();
     const timeStamp = this.getPaymentDate().getTime();
     const uuid = crypto.randomUUID();
