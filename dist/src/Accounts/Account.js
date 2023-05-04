@@ -1,17 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const Cpf_1 = __importDefault(require("../entities/Cpf"));
 class Account {
     constructor(clientName, deposit, cpf) {
-        if (deposit < 200) {
+        if (deposit < 100) {
             throw new Error('Inicial deposit needs to be at least $200');
-        }
-        const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-        if (!cpfRegex.test(cpf)) {
-            throw new Error('INVALID CPF.');
         }
         this._name = clientName;
         this._balance = deposit;
-        this._cpf = cpf;
+        this._cpf = new Cpf_1.default(cpf);
     }
     ;
     // Abstract behavior

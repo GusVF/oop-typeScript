@@ -1,15 +1,19 @@
+import Cpf from "../entities/Cpf";
+
 export default class Account {
   private _balance: number;
   private _name: string;
+  private _cpf: Cpf;
 
-  constructor(clientName: string, deposit: number) {
-    if(deposit < 200) {
+  constructor(clientName: string, deposit: number, cpf: string) {
+    if (deposit < 100) {
       throw new Error('Inicial deposit needs to be at least $200');
     }
     this._name = clientName;
     this._balance = deposit;
+    this._cpf = new Cpf(cpf);
   };
-// Abstract behavior
+  // Abstract behavior
   public debit(value: number) {
     const finalBalance = this._balance - value;
     if (finalBalance < 0) {
@@ -22,24 +26,24 @@ export default class Account {
     this._balance += value;
   };
 
-// Classic sintaxe for typeScript
-  public  getBalance(): number {
-      return this._balance;
+  // Classic sintaxe for typeScript
+  public getBalance(): number {
+    return this._balance;
   };
 
   public setBalance(balance: number) {
-    if(balance < 0) {
+    if (balance < 0) {
       throw new Error('Invalid Balance')
     }
-      this._balance = balance;
+    this._balance = balance;
   };
-// Modern sintaxe for typeScript
-  public  get name(): string {
-      return this._name;
-    };
+  // Modern sintaxe for typeScript
+  public get name(): string {
+    return this._name;
+  };
 
   public set name(name: string) {
-    if(name.length === 0) {
+    if (name.length === 0) {
       throw new Error('Name')
     }
     this._name = name;
