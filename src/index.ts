@@ -1,20 +1,29 @@
-import Account from './entities/Account';
-import Payment from './entities/Payment';
+import Account from './Accounts/Account';
+import PremiumSavings from './Accounts/PremiumSavings';
+import SavingsAcc from './Accounts/SavingsAcc';
+import BoletoPayment from './Payments/BoletoPayment';
+import Payment from './Payments/Payment';
 
-const gusAccount = new Account('Gustavo', 2000);
-const yourAccount = new Account('Mario', 2000);
 
-const netFlixPayment = new Payment({
+const myAccount = new PremiumSavings('Gustavo', '111.111.111-11', 0.5);
+const yourAccount = new Account('Mario', 2000, '222.222.222-22');
+
+
+const payment = new BoletoPayment(
+  new Date(), {
   fromAccount: yourAccount,
-  toAccount: gusAccount,
-  value: 20,
-  dueDate: new Date('2003/03/27'),
-  paymentDate: new Date('2003/02/20'),
+  toAccount: myAccount,
+  value: 100,
+  paymentDate: new Date('2022-01-02'),
 });
-
-netFlixPayment.makePayment();
-console.log(gusAccount);
-console.log(yourAccount);
-// const debit = gusAccount.debit(20)
-// const credit = gusAccount.credit(500);
-// console.log(gusAccount.getBalance(), gusAccount.name);
+// const code = payment.makePayment();
+const code = payment.makePayment();
+const balance = myAccount.getBalance();
+const balance2 = yourAccount.getBalance();
+console.log('your code is:', code);
+console.log('his balance is:', balance2);
+console.log('your balance is:', balance);
+// const accountBalance = myAccount.getBalance();
+// console.log(accountBalance,':Your beginning balance');
+// const myEarnings = myAccount.earnings();
+// console.log(myEarnings, ':your anual earnings');

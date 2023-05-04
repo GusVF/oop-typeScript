@@ -9,30 +9,25 @@ class Payment {
         this._fromAccount = params.fromAccount;
         this._toAccount = params.toAccount;
         this._value = params.value;
-        this._dueDate = params.dueDate;
         this._paymentDate = params.paymentDate;
     }
     ;
-    pastDue() {
-        return this._paymentDate.getTime() > this._dueDate.getTime();
+    getFromAccount() {
+        return this._fromAccount;
     }
-    finalValueCalc() {
-        if (this.pastDue()) {
-            return this._value * 1.2;
-        }
+    getToAccount() {
+        return this._toAccount;
+    }
+    getValue() {
         return this._value;
     }
-    makePayment() {
-        const finalValue = this.finalValueCalc();
-        this._fromAccount.debit(finalValue);
-        this._toAccount.credit(finalValue);
-        const transactionCode = this.generateTransactionCode();
-        return transactionCode;
+    getPaymentDate() {
+        return this._paymentDate;
     }
     generateTransactionCode() {
         // const timeStamp = Date.now(); ------ one way of doing timestamp
         const now = new Date();
-        const timeStamp = this._paymentDate.getTime();
+        const timeStamp = this.getPaymentDate().getTime();
         const uuid = node_crypto_1.default.randomUUID();
         return `${timeStamp}-${uuid}`;
     }
