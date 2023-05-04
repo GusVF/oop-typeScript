@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Account_1 = __importDefault(require("./Accounts/Account"));
 const PremiumSavings_1 = __importDefault(require("./Accounts/PremiumSavings"));
 const BoletoPayment_1 = __importDefault(require("./Payments/BoletoPayment"));
-const DebitPayment_1 = __importDefault(require("./Payments/DebitPayment"));
+const PixPayment_1 = __importDefault(require("./Payments/PixPayment"));
 const myAccount = new PremiumSavings_1.default('Gustavo', '111.111.111-11', 0.5);
 const yourAccount = new Account_1.default('Mario', 2000, '222.222.222-22');
 const schoolPayment = new BoletoPayment_1.default(new Date(), {
@@ -15,7 +15,7 @@ const schoolPayment = new BoletoPayment_1.default(new Date(), {
     value: 100,
     paymentDate: new Date('2022-01-02'),
 });
-const billPayment = new DebitPayment_1.default({
+const billPayment = new PixPayment_1.default('333333333', {
     fromAccount: yourAccount,
     toAccount: myAccount,
     value: 50,

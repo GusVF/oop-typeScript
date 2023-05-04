@@ -8,7 +8,7 @@ export type paymentParams = {
   paymentDate: Date;
 }
 
-export default class Payment {
+export default abstract class Payment {
   private _fromAccount: Account;
   private _toAccount: Account;
   private _value: number;
@@ -20,6 +20,8 @@ export default class Payment {
     this._value = params.value;
     this._paymentDate = params.paymentDate;
   };
+
+abstract makePayment(): void;
 
 public  getFromAccount(): Account {
     return this._fromAccount;
@@ -39,7 +41,7 @@ public getPaymentDate(): Date {
 
   protected generateTransactionCode(): string {
     // const timeStamp = Date.now(); ------ another way of doing timestamp
-    const now = new Date();
+    // const now = new Date();
     const timeStamp = this.getPaymentDate().getTime();
     const uuid = crypto.randomUUID();
     return `${timeStamp}-${uuid}`;
