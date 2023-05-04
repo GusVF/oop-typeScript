@@ -13,13 +13,21 @@ export default abstract class Payment {
   private _toAccount: Account;
   private _value: number;
   private _paymentDate: Date;
+  private static minimumValue: 0;
 
   constructor(params: paymentParams) {
+    Payment.validateValue(params.value)
     this._fromAccount = params.fromAccount;
     this._toAccount = params.toAccount;
     this._value = params.value;
     this._paymentDate = params.paymentDate;
   };
+
+private static validateValue(value: number) {
+  if (value < Payment.minimumValue) {
+    throw new Error('Invalid Value');
+  }
+}
 
 abstract makePayment(): void;
 
