@@ -26,7 +26,7 @@ class Payment {
     }
     generateTransactionCode() {
         // const timeStamp = Date.now(); ------ another way of doing timestamp
-        const now = new Date();
+        // const now = new Date();
         const timeStamp = this.getPaymentDate().getTime();
         const uuid = node_crypto_1.default.randomUUID();
         return `${timeStamp}-${uuid}`;

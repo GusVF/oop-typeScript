@@ -8,18 +8,28 @@ export type paymentParams = {
   paymentDate: Date;
 }
 
-export default class Payment {
+export default abstract class Payment {
   private _fromAccount: Account;
   private _toAccount: Account;
   private _value: number;
   private _paymentDate: Date;
+  private static minimumValue: 0;
 
   constructor(params: paymentParams) {
+    Payment.validateValue(params.value)
     this._fromAccount = params.fromAccount;
     this._toAccount = params.toAccount;
     this._value = params.value;
     this._paymentDate = params.paymentDate;
   };
+
+private static validateValue(value: number) {
+  if (value < Payment.minimumValue) {
+    throw new Error('Invalid Value');
+  }
+}
+
+abstract makePayment(): void;
 
 public  getFromAccount(): Account {
     return this._fromAccount;
@@ -39,7 +49,7 @@ public getPaymentDate(): Date {
 
   protected generateTransactionCode(): string {
     // const timeStamp = Date.now(); ------ another way of doing timestamp
-    const now = new Date();
+    // const now = new Date();
     const timeStamp = this.getPaymentDate().getTime();
     const uuid = crypto.randomUUID();
     return `${timeStamp}-${uuid}`;

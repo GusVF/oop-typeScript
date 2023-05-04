@@ -4,15 +4,20 @@ export default class Account {
   private _balance: number;
   private _name: string;
   private _cpf: Cpf;
+  private static _minimumDeposit: 100;
 
   constructor(clientName: string, deposit: number, cpf: string) {
-    if (deposit < 100) {
-      throw new Error('Inicial deposit needs to be at least $200');
-    }
+    Account.validateDeposit(deposit)
     this._name = clientName;
     this._balance = deposit;
     this._cpf = new Cpf(cpf);
   };
+
+  public static validateDeposit(deposit: number) {
+    if (deposit < Account._minimumDeposit) {
+      throw new Error('Inicial deposit needs to be at least $200');
+    }
+  }
   // Abstract behavior
   public debit(value: number) {
     const finalBalance = this._balance - value;
