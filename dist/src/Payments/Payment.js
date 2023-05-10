@@ -6,12 +6,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const node_crypto_1 = __importDefault(require("node:crypto"));
 class Payment {
     constructor(params) {
+        Payment.validateValue(params.value);
         this._fromAccount = params.fromAccount;
         this._toAccount = params.toAccount;
         this._value = params.value;
         this._paymentDate = params.paymentDate;
     }
     ;
+    static validateValue(value) {
+        if (value < Payment.minimumValue) {
+            throw new Error('Invalid Value');
+        }
+    }
     getFromAccount() {
         return this._fromAccount;
     }

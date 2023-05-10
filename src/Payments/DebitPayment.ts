@@ -1,7 +1,7 @@
-import { Payables } from "../entities/Payables";
-import Payment from "./Payment";
+import { Payables } from '../entities/Payables';
+import Payment from './Payment';
 
-export default class DebitPayment extends Payment implements Payables{
+export default class DebitPayment extends Payment implements Payables {
   public makePayment(): string {
     const value = this.getValue();
     this.getFromAccount().debit(value);

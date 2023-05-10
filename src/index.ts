@@ -7,10 +7,8 @@ import Payment from './Payments/Payment';
 import PixPayment from './Payments/PixPayment';
 import { Payables } from './entities/Payables';
 
-
 const myAccount = new PremiumSavings('Gustavo', '111.111.111-11', 0.5);
 const yourAccount = new Account('Mario', 2000, '222.222.222-22');
-
 
 const schoolPayment = new BoletoPayment(
   new Date(), {
