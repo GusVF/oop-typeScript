@@ -1,11 +1,11 @@
 import { Payables } from "../entities/Payables";
 import Payment, { paymentParams } from "./Payment";
 
-export default class BoletoPayment extends Payment implements Payables{
+export default class BoletoPayment extends Payment implements Payables {
   private _dueDate: Date;
 
   constructor(dueDate: Date, params: paymentParams) {
-    super(params)
+    super(params);
     this._dueDate = dueDate;
   }
 
